@@ -105,6 +105,9 @@ export interface Config {
    */
   sauceProxy?: string;
 
+  cbtUser?: string;
+  cbtKey?: string;
+
   /**
    * The proxy address that WebDriver (e.g. Selenium commands) traffic will go through
    * which is tied to the browser session.
@@ -320,7 +323,6 @@ export interface Config {
    * }
    */
   capabilities?: {
-
     [key: string]: any;
 
     browserName?: string;
@@ -651,11 +653,11 @@ export interface Config {
     /**
      * If true, run specs in semi-random order
      */
-    random?: boolean,
+    random?: boolean;
     /**
      * Set the randomization seed if randomization is turned on
      */
-    seed?: string,
+    seed?: string;
   };
 
   /**
@@ -663,7 +665,7 @@ export interface Config {
    *
    * See the full list at http://mochajs.org/
    */
-  mochaOpts?: {[key: string]: any; ui?: string; reporter?: string;};
+  mochaOpts?: {[key: string]: any; ui?: string; reporter?: string};
 
   /**
    * See docs/plugins.md

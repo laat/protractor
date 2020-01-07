@@ -10,7 +10,6 @@ export * from './testObject';
 export * from './kobiton';
 export * from './useExistingWebDriver';
 
-
 import {AttachSession} from './attachSession';
 import {BrowserStack} from './browserStack';
 import {DriverProvider} from './driverProvider';
@@ -25,6 +24,7 @@ import {UseExistingWebDriver} from './useExistingWebDriver';
 
 import {Config} from '../config';
 import {Logger} from '../logger';
+import {CrossBrowserTesting} from './crossBrowserTesting';
 
 let logger = new Logger('driverProviders');
 
@@ -57,6 +57,9 @@ export let buildDriverProvider = (config: Config): DriverProvider => {
   } else if (config.sauceUser && config.sauceKey) {
     driverProvider = new Sauce(config);
     logWarnings('sauce', config);
+  } else if (config.cbtUser && config.cbtKey) {
+    driverProvider = new CrossBrowserTesting(config);
+    logWarnings('crossBrowserTesting', config);
   } else if (config.seleniumServerJar) {
     driverProvider = new Local(config);
     logWarnings('local', config);
@@ -71,7 +74,6 @@ export let buildDriverProvider = (config: Config): DriverProvider => {
 };
 
 export let logWarnings = (providerType: string, config: Config): void => {
-
   let warnInto = 'Using driver provider ' + providerType +
       ', but also found extra driver provider parameter(s): ';
   let warnList: string[] = [];
